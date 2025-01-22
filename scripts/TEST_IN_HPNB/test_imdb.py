@@ -4,7 +4,7 @@ import numpy as np
 def vectorize_sequences(sequences, dimension=10000) :
     results = np.zeros((len(sequences), dimension))
     for i, sequence in enumerate(sequences) :
-        print(i, sequence[:10])
+#        print(i, sequence[:10])
         results[i, sequence] = 1.
     return results
 
@@ -29,5 +29,7 @@ print("After vectorize x_train[0]= ", x_train[0])
 # 標籤向量化
 x_train = np.asarray(train_labels).astype('float32')
 y_test = np.asarray(test_labels).astype('float32')
+
+print("=== Finished!! ===")
 
 
