@@ -5,7 +5,7 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 
-
+""" marked 1
 ###--- § 2-1 加載Keras中的MNIST數據集 ---###
 from keras.datasets import mnist
 (train_images, train_labels), (test_images, test_labels) = mnist.load_data()
@@ -39,7 +39,7 @@ print("train_images[2]= ", train_images[2])
 
 test_images = test_images.reshape((10000, 28 * 28))
 test_images = test_images.astype('float32') / 255
-
+"""
 
 ###--- § 2-5 准備標籤 ---###
 """
@@ -60,7 +60,7 @@ print("test_loss= ", test_loss, ", test_acc= ", test_acc)
 """ 
 
 ###--- § 2-6 顯示第4個數字 ---###
-""" marked 3
+""" marked 3 
 from keras.datasets import mnist
 (train_images, train_labels), (test_images, test_labels) = mnist.load_data()
 
