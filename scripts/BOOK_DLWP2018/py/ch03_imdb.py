@@ -23,8 +23,26 @@ decode_review = ' '.join(
 print("decode_review=", decode_review)
 
 
-print("len=", len(decode_review))
-print("type=", type(decode_review))
+#print("len=", len(decode_review))
+#print("type=", type(decode_review))
+
+# 3-2 
+import numpy as np
+def vectorize_sequences(sequences, dimension=10000) :
+    results = np.zeros((len(sequences), dimension))
+    for i, sequence in enumerate(sequences) :
+        results[i, sequence] = 1.
+    return results
+
+x_train = vectorize_sequences(train_data) # 訓練數據向量化
+x_test = vectorize_sequences(test_data) # 測試數據向量化
+
+print(x_train[0])
+
+y_train = np.asarray(train_labels).astype('float32')
+y_test = np.asarray(test_labels).astype('float32')
+
+
 
 
 
