@@ -136,6 +136,5 @@ results = model.evaluate(x_test, y_test)
 
 print("results= ", results)
 
-
 print("=== PGM END ===")
 

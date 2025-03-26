@@ -107,15 +107,57 @@ plt.legend()
 
 plt.show()
 
+# 3-21 從頭開始重新訓練一個模型
+model = models.Sequential()
+model.add(layers.Dense(64, activation='relu', input_shape=(10000,)))
+model.add(layers.Dense(64, activation='relu'))
+model.add(layers.Dense(46, activation='softmax'))
 
+model.compile(optimizer='rmsprop',
+        loss='categorical_crossentropy',
+        metrics=['accuracy'])
+model.fit(partial_x_train,
+        partial_y_train,
+        epochs=9,
+        batch_size=512,
+        validation_data=(x_val, y_val))
+results = model.evaluate(x_test, one_hot_test_labels)
 
+print("results= ", results)
 
+# 隨機分類
+import copy
+test_labels_copy = copy.copy(test_labels)
+np.random.shuffle(test_labels_copy)
+hits_array = np.array(test_labels_copy)
+print(float(np.sum(hits_array)) / len(test_labels))
+    
+# 3-22 在新數據上生成預測結果
+predictions = model.predict(x_test)
+print("predictions[0].shape= ", predictions[0].shape)
+print("np.argmax(predictions[0]= ", np.argmax(predictions[0]))
 
+y_train = np.array(train_labels)
+y_test = np.array(test_labels)
 
+model.compile(optimizer='rmsprop',
+    loss='sparse_categorical_crossentropy',
+    metrics=['acc'])
 
+# 3-23 具有信息瓶頸的模型
+model = models.Sequential()
+model.add(layers.Dense(64, activation='relu', input_shape=(10000,)))
+model.add(layers.Dense(4, activation='relu'))
+model.add(layers.Dense(46, activation='softmax'))
 
-
-
+model.compile(optimizer='rmsprop',
+    loss='categorical_crossentropy',
+    metrics=['accuracy'])
+model.fit(partial_x_train,
+    partial_y_train,
+    epochs=20,
+    batch_size=128,
+    validation_data=(x_val, y_val))
 
 print("=== PGM END ===")
 
