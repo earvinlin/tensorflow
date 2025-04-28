@@ -47,7 +47,7 @@ y_test = to_categorical(y_test, n_classes)
 print("y_train[0]= ", y_train[0])
 
 model = Sequential()
-mode.add(Dense(64, activation='sigmoid', input_shape=(784,))) # 隱藏層；激活函數 sigmoid
+model.add(Dense(64, activation='sigmoid', input_shape=(784,))) # 隱藏層；激活函數 sigmoid
 model.add(Dense(10, activation='softmax')) # 輸出層
 
 

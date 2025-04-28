@@ -37,10 +37,10 @@ model.add(Dense(17, activation='softmax'))
 
 model.summary()
 
-"""
+
 model.compile(loss='categorical_crossentropy', optimizer='adam',
         metrics=['accuracy'])
 model.fit(x_train, y_train, batch_size=128, epochs=10, verbose=1,
         validation_data=(x_test, y_test))
-"""
+
 
