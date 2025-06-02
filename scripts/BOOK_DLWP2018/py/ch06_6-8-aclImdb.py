@@ -3,7 +3,8 @@ import os
 import platform
 
 if platform.system() == "Windows" :
-    imdb_dir = 'C:\\Workspaces\\Datasets\\aclImdb' 
+#    imdb_dir = 'C:\\Workspaces\\Datasets\\aclImdb' 
+    imdb_dir = 'D:\\Workspaces\\Datasets\\aclImdb' 
 elif platform.system() == "Linux" :
     imdb_dir = '/home/earvin/workspaces/datasets/aclImdb'
 else : # Mac path 
