@@ -3,7 +3,8 @@ import os
 import platform
 
 if platform.system() == "Windows" :
-    imdb_dir = 'C:\\Workspaces\\Datasets\\aclImdb' 
+#    imdb_dir = 'C:\\Workspaces\\Datasets\\aclImdb' 
+    imdb_dir = 'D:\\Workspaces\\Datasets\\aclImdb' 
 elif platform.system() == "Linux" :
     imdb_dir = '/home/earvin/workspaces/datasets/aclImdb'
 else : # Mac path 
@@ -35,8 +36,11 @@ for label_type in ['neg', 'pos']:
 
 
 
-# Listing 6.9 Tokenizing the text of the raw IMDB data
+# Listing 6.9 Tokenizing the text of the raw IMDB datai
+import tensorflow as tf
+from tensorflow import keras
 from keras.preprocessing.text import Tokenizer # 分詞器；tf v2.15 keras
+#from keras.utils import Tokenizers
 # 20240130 tf2.12 
 #from keras.preprocessing.sequence import pad_sequences
 from keras.utils import pad_sequences
