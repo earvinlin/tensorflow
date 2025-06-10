@@ -12,9 +12,15 @@ from IPython.display import Image
 
 # Method 1
 model = keras.Sequential(name='Sequential')
-model.add(layers.Dense(64, activation='relu', input_shape=(784,)))
+#model.add(layers.Dense(64, activation='relu', input_shape=(784,)))
+model.add(layers.Input(shape=(784,)))
+model.add(layers.Dense(64, activation='relu'))
 model.add(layers.Dense(64, activation='relu'))
 model.add(layers.Dense(10, activation='softmax'))
+
+model.compile(optimizer='rmsprop',
+        loss='binary_crossentropy',
+        metrics=['accuracy'])
 
 # Method 2
 """
@@ -27,6 +33,7 @@ model = tf.keras.Sequential([
 plot_model(model, to_file='Functional_API_Sequential_model.png')
 
 Image('Functional_API_Sequential_model.png')
+
 """
 #img = Image.open('Functional_API_Sequential_model.png')
 from PIL import Image
@@ -35,6 +42,7 @@ img = Image.open('Functional_API_Sequential_model.png')
 display(img)
 """
 
+"""
 import matplotlib.pyplot as plt
 import matplotlib.image as img
 import os
@@ -42,4 +50,4 @@ os.chdir('/home/earvin/workspaces/GithubProjects/tensorflow/scripts/BOOK_EasyStu
 image1 = img.imread('Functional_API_Sequential_model.png')
 plt.imshow(image1)
 plt.show()
-
+"""
