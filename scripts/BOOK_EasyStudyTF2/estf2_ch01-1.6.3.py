@@ -75,5 +75,30 @@ Image('Functional_API_Multi_Output_Model')
 ################################
 # Multi Input and OutPut Model #
 ################################
+# 網路模型輸入層
+image_inputs = keras.Input(shape=(256, 256, 3), name='Image_Input')
+info_inputs = keras.Input(shape=(10,), name='Info_input')
 
-# pdf.48
+# 網路模型隱藏層(Image Input)
+h1 = layers.Conv2D(64, 3, activation='relu', name='hidden1')(image_inputs)
+h2 = layers.Conv2D(64, 3, strides=2, activation='relu', name='hidden2')(h1)
+h3 = layers.Conv2D(64, 3, strides=2, activation='relu', name='hidden3')(h2)
+flatten = layers.Flatten()(h3)
+
+# 網路模型隱藏層(Information Input)
+h4 = layers.Dense(64)(info_inputs)
+concat = layers.Concatenate()([flatten, h4]) # 結合Image and Information特徵
+
+# 網路模型輸出層
+weather_outputs = layers.Dense(1, name='Output1')(concat)
+temp_outputs = layers.Dense(1, name='Output2')(concat)
+humidity_outputs = layers.Dense(1, name='Output3')(concat)
+
+# 建立網路模型
+model = keras.Model(inputs[image_inputs, info_inputs],
+                    outputs=[weather_outputs, temp_outputs, humidity_outputs])
+
+# 顯示網路模型架構
+plot_model(model, to_file='Functional_API_Multi_Input_And_Output_Model.png')
+Image('Functional_API_Multi_Input_And_Output_Model.png')
+
