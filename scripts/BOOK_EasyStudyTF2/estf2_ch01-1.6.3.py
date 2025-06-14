@@ -102,3 +102,6 @@ model = keras.Model(inputs[image_inputs, info_inputs],
 plot_model(model, to_file='Functional_API_Multi_Input_And_Output_Model.png')
 Image('Functional_API_Multi_Input_And_Output_Model.png')
 """
+
+
+
