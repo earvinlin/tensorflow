@@ -71,7 +71,7 @@ model = keras.Model(inputs=inputs, outputs=[age_output, gender_output])
 plot_model(model, to_file='Functional_API_Multi_Output_Model.png')
 Image('Functional_API_Multi_Output_Model')
 
-"""
+
 ################################
 # Multi Input and OutPut Model #
 ################################
@@ -95,10 +95,11 @@ temp_outputs = layers.Dense(1, name='Output2')(concat)
 humidity_outputs = layers.Dense(1, name='Output3')(concat)
 
 # 建立網路模型
-model = keras.Model(inputs[image_inputs, info_inputs],
+model = keras.Model(inputs=[image_inputs, info_inputs],
                     outputs=[weather_outputs, temp_outputs, humidity_outputs])
 
 # 顯示網路模型架構
 plot_model(model, to_file='Functional_API_Multi_Input_And_Output_Model.png')
 Image('Functional_API_Multi_Input_And_Output_Model.png')
-"""
+
+
