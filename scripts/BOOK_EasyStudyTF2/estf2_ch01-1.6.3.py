@@ -101,10 +101,5 @@ model = keras.Model(inputs=[image_inputs, info_inputs],
 # 顯示網路模型架構
 plot_model(model, to_file='Functional_API_Multi_Input_And_Output_Model.png')
 Image('Functional_API_Multi_Input_And_Output_Model.png')
-<<<<<<< HEAD
-"""
-
-=======
->>>>>>> 906e81406be4e08a462522ce3969d8ce217c6df3
 
 
