@@ -15,7 +15,10 @@ print(os.getcwd())
 ####################
 # [02]資料讀取並分析 #
 ####################
-data = pd.read_csv("data/kc_house_data.csv")
+# windows use
+data = pd.read_csv("data\kc_house_data.csv")
+# mac / linux use
+#data = pd.read_csv("data/kc_house_data.csv")
 
 print(data.shape)
 
@@ -77,21 +80,29 @@ model.compile(keras.optimizers.Adam(0.001),
               loss=keras.losses.MeanSquaredError(),
               metrics=[keras.metrics.MeanAbsoluteError()])
 
-model_dir = 'lab2-logs/models/'
+#model_dir = 'lab2-logs/models/'
+model_dir = 'lab2-logs\\models\\'
 os.makedirs(model_dir, exist_ok=True)
 
 log_dir = os.path.join('lab2-logs', 'model-1')
 model_cbk = keras.callbacks.TensorBoard(log_dir=log_dir)
 
-model_mckp = keras.callbacks.ModelCheckpoint(model_dir + '/Best-model-1.h5',
+model_mckp = keras.callbacks.ModelCheckpoint(model_dir + '\\Best-model-1.h5',
                                              monitor='val_mean_absolute_error',
                                              save_best_only=True,
                                              mode='min')
+""" 
 history = model.fit(x_train, y_train,
                    batch_size=64,
                    epochs=300,
                    validation_data=(x_val, y_val),
                    callbacks=[model_cbk, model_mckp])
+"""
+history = model.fit(x_train, y_train,
+                   batch_size=64,
+                   epochs=300,
+                   validation_data=(x_val, y_val))
+
 """
 plt.plot(history.history['loss'], label='train_loss')
 plt.plot(history.history['val_loss'], label='val_loss')
