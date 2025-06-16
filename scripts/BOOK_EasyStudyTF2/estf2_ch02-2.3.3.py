@@ -16,9 +16,9 @@ print(os.getcwd())
 # [02]資料讀取並分析 #
 ####################
 # windows use
-data = pd.read_csv("data\kc_house_data.csv")
+#data = pd.read_csv("data\\kc_house_data.csv")
 # mac / linux use
-#data = pd.read_csv("data/kc_house_data.csv")
+data = pd.read_csv("data/kc_house_data.csv")
 
 print(data.shape)
 
@@ -80,17 +80,29 @@ model.compile(keras.optimizers.Adam(0.001),
               loss=keras.losses.MeanSquaredError(),
               metrics=[keras.metrics.MeanAbsoluteError()])
 
-#model_dir = 'lab2-logs/models/'
-model_dir = 'lab2-logs\\models\\'
+#windows use
+#model_dir = 'lab2-logs\\models\\'
+#mac /linux use
+model_dir = 'lab2-logs/models/'
 os.makedirs(model_dir, exist_ok=True)
 
+"""
 log_dir = os.path.join('lab2-logs', 'model-1')
 model_cbk = keras.callbacks.TensorBoard(log_dir=log_dir)
 
-model_mckp = keras.callbacks.ModelCheckpoint(model_dir + '\\Best-model-1.h5',
+model_mckp = keras.callbacks.ModelCheckpoint(model_dir + '/Best-model-1.h5',
                                              monitor='val_mean_absolute_error',
                                              save_best_only=True,
                                              mode='min')
+
+"""                                             # TensorBoard回調函數會幫忙紀錄訓練資訊，並存成TensorBoard的紀錄檔
+log_dir = os.path.join('lab2-logs', 'model-1')
+model_cbk = keras.callbacks.TensorBoard(log_dir=log_dir)
+# ModelCheckpoint回調函數幫忙儲存網路模型，可以設定只儲存最好的模型，「monitor」表示被監測的數據，「mode」min則代表監測數據越小越好。
+model_mckp = keras.callbacks.ModelCheckpoint(model_dir + '/Best-model-1.h5', 
+                                        monitor='val_mean_absolute_error', 
+                                        save_best_only=True, 
+                                        mode='min')
 """ 
 history = model.fit(x_train, y_train,
                    batch_size=64,
@@ -98,10 +110,12 @@ history = model.fit(x_train, y_train,
                    validation_data=(x_val, y_val),
                    callbacks=[model_cbk, model_mckp])
 """
-history = model.fit(x_train, y_train,
-                   batch_size=64,
-                   epochs=300,
-                   validation_data=(x_val, y_val))
+history = model.fit(x_train, y_train,  # 傳入訓練數據
+               batch_size=64,  # 批次大小設為64
+               epochs=300,  # 整個dataset訓練300遍
+               validation_data=(x_val, y_val),  # 驗證數據
+               callbacks=[model_cbk, model_mckp])  # Tensorboard回調函數紀錄訓練過程，ModelCheckpoint回調函數儲存最好的模型
+
 
 """
 plt.plot(history.history['loss'], label='train_loss')
