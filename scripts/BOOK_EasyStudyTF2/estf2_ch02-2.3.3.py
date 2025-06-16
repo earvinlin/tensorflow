@@ -1,6 +1,10 @@
-##################
+"""
+20250616 此版本不work，目前找不出問題…
+"""
+
+####################
 # [01]匯入必要套件 #
-##################
+####################
 import os
 import numpy as np
 import pandas as pd
@@ -12,9 +16,9 @@ from keras import layers
 
 print(os.getcwd())
 
-####################
+######################
 # [02]資料讀取並分析 #
-####################
+######################
 # windows use
 #data = pd.read_csv("data\\kc_house_data.csv")
 # mac / linux use
@@ -26,9 +30,9 @@ pd.options.display.max_columns = 25
 #print(data.head)
 print(data.dtypes)
 
-#################
+##################
 # [03]資料前處理 #
-#################
+##################
 data['year'] = pd.to_numeric(data['date'].str.slice(0, 4))
 data['month'] = pd.to_numeric(data['date'].str.slice(4, 6))
 data['day'] = pd.to_numeric(data['date'].str.slice(6, 8))
@@ -48,18 +52,19 @@ train_data = data.loc[train_indexes]
 val_data = data.loc[val_indexes]
 test_data = data.loc[test_indexes]
 
-#############
+##############
 # [04]標準化 #
-#############
+##############
 train_validation_data = pd.concat([train_data, val_data])
 mean = train_validation_data.mean()
 std = train_validation_data.std()
+
 train_data = (train_data - mean) / std
 val_data = (val_data - mean) / std
 
-##################################
+#####################################
 # [05]建立Numpy array格式的訓練資料 #
-##################################
+#####################################
 x_train = np.array(train_data.drop('price', axis='columns'))
 y_train = np.array(train_data['price'])
 x_val = np.array(val_data.drop('price', axis='columns'))
@@ -67,9 +72,9 @@ y_val = np.array(val_data['price'])
 
 print(x_train.shape)
 
-#######################
+##########################
 # [06]建立並訓練網路模型 #
-#######################
+##########################
 model = keras.Sequential(name=' model-1')
 model.add(layers.Dense(64, activation='relu', input_shape=(21,)))
 model.add(layers.Dense(64, activation='relu'))
