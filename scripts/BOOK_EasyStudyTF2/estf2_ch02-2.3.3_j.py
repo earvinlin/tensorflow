@@ -82,6 +82,7 @@ os.makedirs(model_dir, exist_ok=True)
 log_dir = os.path.join('lab2-logs', 'model-1')
 model_cbk = keras.callbacks.TensorBoard(log_dir=log_dir)
 # ModelCheckpoint回調函數幫忙儲存網路模型，可以設定只儲存最好的模型，「monitor」表示被監測的數據，「mode」min則代表監測數據越小越好。
+# 使用的是 TensorFlow / Keras 3.0+（新版）時，要採用.keras格式
 model_mckp = keras.callbacks.ModelCheckpoint(model_dir + '/Best-model-1.keras', 
                                         monitor='val_mean_absolute_error', 
                                         save_best_only=True, 
